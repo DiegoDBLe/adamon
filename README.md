@@ -12,6 +12,7 @@ O objetivo deste projeto foi aplicar conceitos e práticas de testes automatizad
 * Dbvear: ferramenta utilizada para modelagem e visualização do banco de dados.
 * Postman: ferramenta utilizada para testar as requisições da API.
 * JUnit: framework utilizado para escrever e executar testes automatizados.
+* IntelliJ IDEA 2022.3.1
 
 ### Configuração do ambiente
 Para executar a aplicação é necessário ter as seguintes ferramentas instaladas no seu computador:
