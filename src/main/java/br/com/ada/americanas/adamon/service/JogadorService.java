@@ -23,13 +23,12 @@ public class JogadorService {
         5 - Pesquisar como testar um método void com 'Mockito'
      */
 
-    public void buyAdamon(Jogador jogador, Adamon adamon){
-
+    public void buyAdamon(Jogador jogador, Adamon adamon) {
         List<Adamon> equipeAdamonJogador = jogador.getAdamons();
         BigDecimal saldoAtual = jogador.getSaldo();
         BigDecimal precoAdamon = adamon.getPreco();
 
-        boolean possuiSaldoSuficiente = saldoAtual.compareTo(precoAdamon) >= 0;
+        boolean possuiSaldoSuficiente = saldoAtual.compareTo(precoAdamon) > 0;
         boolean possuiEspacoNaEquipe = equipeAdamonJogador.size() < 6;
 
         if (possuiEspacoNaEquipe && possuiSaldoSuficiente) {
@@ -42,6 +41,7 @@ public class JogadorService {
             throw new RuntimeException("Não possui espaço na equipe");
         }
     }
+
 
     public Jogador finById(Long id){
         return jogadorRepository.findById(id).orElseThrow(() ->

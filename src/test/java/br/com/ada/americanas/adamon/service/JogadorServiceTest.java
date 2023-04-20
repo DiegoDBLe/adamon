@@ -22,59 +22,47 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class JogadorServiceTest {
-
     @InjectMocks
-    private JogadorService jogadorService;
+    JogadorService jogadorService;
+
     @Mock
-    private JogadorRepository jogadorRepository;
+    private JogadorRepository repository;
+
 
     @Test
-    void deveConseguirComprarAdamon(){
+    void deveConseguirComprarAdamon() {
         //cenário
-        Jogador jogador = new Jogador();
-        Adamon adamon = new Adamon();
-        when(jogadorRepository.findById(jogador.getId())).thenReturn(Optional.of(jogador));
-
-        //ação
+        Jogador jogador = obterJogador();
+        Adamon adamon = obterAdamon();
+        jogador.setSaldo(BigDecimal.valueOf(100));
+        Mockito.when(repository.findById(jogador.getId())).thenReturn(Optional.of(jogador));
+        //acao
         jogadorService.buyAdamon(jogador, adamon);
 
         //verificação
         assertFalse(jogador.getAdamons().isEmpty());
-        Mockito.verify(jogadorRepository).save(jogador); // se o repository salvou o jogador?
+        Mockito.verify(repository).save(jogador);
     }
 
     @Test
-    public void testComprarAdamon() {
-        Jogador jogador = new Jogador();
-        Adamon adamon = new Adamon();
-
-        when(jogadorRepository.save(jogador)).thenReturn(jogador);
-
-        jogadorService.buyAdamon(jogador, adamon);
-
-        assertEquals(new BigDecimal("100"), jogador.getSaldo());
-        assertTrue(jogador.getAdamons().contains(adamon));
-    }
-
-    @Test
-    public void testComprarAdamonSaldoInsuficiente() {
-        //Cenário
+    void naoDeveConseguirComprarAdamonNaoPossuiSaldo() {
+        //cenário
         Jogador jogador = obterJogador();
-        jogador.setSaldo(BigDecimal.valueOf(0));//saldo 0
+        jogador.setSaldo(BigDecimal.valueOf(0)); //saldo 0
         Adamon adamon = obterAdamon();
 
-        //Ação
-        Assertions.assertThrows(RuntimeException.class, () -> {jogadorService.buyAdamon(jogador, adamon);});
+        //acao e verificação
+        Assertions.assertThrows(RuntimeException.class, () -> { jogadorService.buyAdamon(jogador, adamon); });
     }
 
     @Test
-    public void testNaoDeveComprarAdamonEquipeCheia() {
-        //Cenário
+    void naoDeveConseguirComprarAdamonPoisEquipeEstaCheia() {
+        //cenário
         Jogador jogador = obterJogador();
         jogador.setAdamons(TesteUtils.obterAdamons()); //equipe cheia
         Adamon adamon = obterAdamon();
 
-        //Ação
-        Assertions.assertThrows(RuntimeException.class, () -> {jogadorService.buyAdamon(jogador, adamon);});
+        //acao
+        Assertions.assertThrows(RuntimeException.class, () -> { jogadorService.buyAdamon(jogador, adamon); });
     }
 }

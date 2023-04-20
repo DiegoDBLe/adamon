@@ -47,6 +47,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>li.naska.springejbautowiring</groupId>
+            <artifactId>spring-ejb-autowiring</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 
     <build>

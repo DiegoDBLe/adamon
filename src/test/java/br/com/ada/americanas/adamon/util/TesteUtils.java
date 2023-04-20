@@ -2,6 +2,8 @@ package br.com.ada.americanas.adamon.util;
 
 import br.com.ada.americanas.adamon.model.Adamon;
 import br.com.ada.americanas.adamon.model.Jogador;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -52,5 +54,15 @@ public class TesteUtils {
         jogador.setPassword("123456");
 
         return jogador;
+    }
+
+    public static String jsonAsString(Object obj) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            return mapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException("Não foi possível converter o objeto");
+        }
     }
 }
