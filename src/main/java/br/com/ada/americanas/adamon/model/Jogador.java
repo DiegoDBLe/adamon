@@ -2,6 +2,7 @@ package br.com.ada.americanas.adamon.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

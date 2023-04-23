@@ -5,7 +5,6 @@ import br.com.ada.americanas.adamon.model.Jogador;
 import br.com.ada.americanas.adamon.repository.JogadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.List;
 public class JogadorService {
     @Autowired
     private JogadorRepository jogadorRepository;
+
 
     /* 01 - Exercicio:
         1 - Implementar preços na classe 'Adamon'
@@ -28,6 +28,47 @@ public class JogadorService {
     lógica de uma batalha entre duas equipes de Adamons. A lógica da batalha fica a sua escolha,
     um jogador será vitorioso o adversário não possuir mais adamons vivos (vida > 0);
      */
+
+    public boolean temAdamonsVivos(List<Adamon> equipe){
+        for (Adamon adamons : equipe) {
+            if (adamons.getVida() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Adamon escolherAdamon(List<Adamon> equipe) {
+        Adamon adamonEscolhido = null;
+        for (Adamon adamon: equipe ) {
+            if (adamon.getVida() > 0) {
+                if(adamonEscolhido == null || adamon.getVida() < adamonEscolhido.getVida()) {
+                    adamonEscolhido = adamon;
+                }
+            }
+        }
+        return adamonEscolhido;
+    }
+
+    public void batalhar(Jogador jogador, Jogador adversario){
+        List<Adamon> equipejogador = jogador.getAdamons();
+        List<Adamon> equipeAdversario = adversario.getAdamons();
+
+        while(this.temAdamonsVivos(equipejogador) && this.temAdamonsVivos(equipeAdversario)){
+            Adamon adamonJogador1 = escolherAdamon(equipejogador);
+            Adamon adamonJogador2 = escolherAdamon(equipeAdversario);
+
+            adamonJogador1.atacar(adamonJogador2);
+            adamonJogador2.atacar(adamonJogador1);
+        }
+
+        if (this.temAdamonsVivos(equipejogador)){
+            System.out.println(jogador.getNickname() + "Venceu a Batalha!");
+        }else {
+            System.out.println(adversario.getNickname() + "Venceu a Batalha!");
+        }
+    }
+
 
     public void buyAdamon(Jogador jogador, Adamon adamon) {
         List<Adamon> equipeAdamonJogador = jogador.getAdamons();
