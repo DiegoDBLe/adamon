@@ -19,7 +19,7 @@ public class AdamonService {
     }
 
     public Adamon finById(Long id){
-        return adamonRepository.findById(id).orElse(null);
+        return adamonRepository.findById(id).orElseThrow(() -> new RuntimeException("Não encontrado cliente"));
     }
     public Adamon createNewAdamon(Adamon adamon){
         return adamonRepository.save(adamon);

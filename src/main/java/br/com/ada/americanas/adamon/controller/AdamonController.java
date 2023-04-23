@@ -5,10 +5,7 @@ import br.com.ada.americanas.adamon.service.AdamonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,11 @@ public class AdamonController {
     @PostMapping
     public ResponseEntity<Adamon> createNewAdamon(Adamon adamon){
         return new ResponseEntity<>(adamonService.createNewAdamon(adamon), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Adamon> encontraAdamonPorId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(adamonService.finById(id), HttpStatus.OK);
     }
 
 }

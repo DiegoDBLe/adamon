@@ -15,12 +15,18 @@ public class JogadorService {
     @Autowired
     private JogadorRepository jogadorRepository;
 
-    /*
+    /* 01 - Exercicio:
         1 - Implementar preços na classe 'Adamon'
         2 - Implementar método de compra do 'Adamon'
         3 - Um jogador só pode ter no máximo 6 adamons em sua equipe
         4 - Escrever testes para este método
         5 - Pesquisar como testar um método void com 'Mockito'
+     */
+
+     /* 02 - Exercicio:
+    Criar um método batalhar que recebe dois jogadores, e este método será responsável pela
+    lógica de uma batalha entre duas equipes de Adamons. A lógica da batalha fica a sua escolha,
+    um jogador será vitorioso o adversário não possuir mais adamons vivos (vida > 0);
      */
 
     public void buyAdamon(Jogador jogador, Adamon adamon) {
