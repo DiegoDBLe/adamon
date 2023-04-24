@@ -39,14 +39,31 @@ public class Adamon {
     @Column(nullable = false)
     private BigDecimal preco;
 
+
     public void atacar(Adamon adversario) {
-        if (this.getVida() <= 0 ){
-            System.out.println(this.getName() + " não pode atacar, pois já está fora de combate.");
-            return;
+        while (this.getVida() > 0 && adversario.getVida() > 0) {
+            this.atacar(adversario);
+            adversario.atacar(this);
         }
-        if (adversario.getVida() <= 0) {
-            System.out.println(adversario.getName() + " já está fora de combate.");
-            return;
+
+        if (this.getVida() <= 0 ){
+            System.out.println(this.getName() + " perdeu a batalha!");
+        }
+        else {
+            System.out.println(adversario.getName() + " perdeu a batalha!");
         }
     }
+
+
+//        public void atacar(Adamon adversario) {
+//        if (this.getVida() <= 0 ){
+//            System.out.println(this.getName() + " não pode atacar, pois já está fora de combate.");
+//            return;
+//        }
+//        if (adversario.getVida() <= 0) {
+//            System.out.println(adversario.getName() + " já está fora de combate.");
+//            return;
+//        }
+//    }
+
 }
