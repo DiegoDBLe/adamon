@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class JogadorServiceTest {
+ class JogadorServiceTest {
     @InjectMocks
     JogadorService jogadorService;
 
@@ -73,7 +73,7 @@ public class JogadorServiceTest {
     }
 
     @Test
-    public void testTemAdamonsVivos() {
+     void testTemAdamonsVivos() {
         List<Adamon> equipe = new ArrayList<>();
         Adamon adamon = new Adamon();
         adamon.setName("AdaChu");
@@ -91,7 +91,7 @@ public class JogadorServiceTest {
     }
 
     @Test
-    public void testEscolherAdamon() {
+     void testEscolherAdamon() {
         List<Adamon> equipe = new ArrayList<>();
         Adamon adamon = new Adamon();
         adamon.setName("AdaChu");
@@ -108,7 +108,7 @@ public class JogadorServiceTest {
     }
 
     @Test
-    public void testBatalhar() {
+     void testBatalhar() {
         Jogador jogador1 = new Jogador();
         jogador1.setNickname("Ash");
 
